@@ -1,21 +1,154 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/styles.css">
-    <title>Map App</title>
-</head>
-<body>
-    <header>
-        <h1>Welcome to Map App</h1>
-        <nav>
-            <a href="/register">Register</a>
-            <a href="/login">Login</a>
-        </nav>
-    </header>
-    <main>
-        <p>This is a map application. Please register or log in to use the map features.</p>
-    </main>
-</body>
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Harnasiowy Geoportal</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="css/styles.css" />
+		<noscript><link rel="stylesheet" href="css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload landing">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+			<header id="header">
+				<h1 id="logo">Geoportal SKPG Harnasie</h1>
+					<nav id="nav">
+						<ul>
+							<li><a href="#one">Co to?</a></li>
+							<li><a href="#two">Autorzy</a></li>
+							<li><a href="#three">Pomoc</a></li>
+							<li><a href="#four">Kontakt</a></li>
+							<li><a href="/login" class="button primary">Zaloguj</a></li>
+							<li><a href="/register" class="button primary">Zarejestruj</a></li>
+						</ul>
+					</nav>
+				</header>
+
+			<!-- Banner -->
+				<section id="banner">
+					<div class="content">
+						<header>
+							<h2>Geoportal SKPG Harnasie</h2>
+							<p>Jedna z wielu przydatnych pomocy naukowych</p>
+						</header>
+						<span class="image"><img src="images/Logo-SKPG-Harnasie.png" alt="" /></span>
+					</div>
+					<a href="#one" class="goto-next scrolly">Następny</a>
+				</section>
+
+			<!-- One -->
+				<section id="one" class="spotlight style1 bottom">
+					<span class="image fit main"><img src="images/co_to.png" alt="" /></span>
+					<div class="content">
+						<div class="container">
+							<div class="row">
+								<div class="col-4 col-12-medium">
+									<header>
+										<h2>Co to takiego?</h2>
+										<p>Przedstawienie wielu zagadnień na mapie</p>
+									</header>
+								</div>
+								<div class="col-4 col-12-medium">
+									<p>do napisania</p>
+								</div>
+								<div class="col-4 col-12-medium">
+									<p>do napisania</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<a href="#two" class="goto-next scrolly">Następny</a>
+				</section>
+
+			<!-- Two -->
+				<section id="two" class="spotlight style2 right">
+					<span class="image fit main"><img src="images/sunset-4113091_1920.jpg" alt="" /></span>
+					<div class="content">
+						<header>
+							<h2>Autorzy</h2>
+							<p>Pomysł powstał w roku 2022</p>
+						</header>
+						<p>Jako obszarne opracowanie autorów jest wielu i nie jesteśmy w stanie podać imion i nazwisk. Przyjmuje się jednak, że spora liczba kursantów oraz prawie każdy Harnaś ma swój wkład w powstanie tego projektu.</p>
+						<ul class="actions">
+							<li><a href="https://www.skpg.gliwice.pl/" class="button">Więcej o Harnasiach</a></li>
+						</ul>
+					</div>
+					<a href="#three" class="goto-next scrolly">Następny</a>
+				</section>
+
+			<!-- Three -->
+				<section id="three" class="spotlight style3 left">
+					<span class="image fit main bottom"><img src="images/help.svg" alt="" /></span>
+					<div class="content">
+						<header>
+							<h2>Pomoc</h2>
+							<p>Krótki przewodnik dla usprawnienia poruszania się po harnasiowym geoportalu</p>
+						</header>
+						<p>Na tym etapie właściwie wystarczy Ci informacja, że aby skorzystać z tego materiału musisz być zalogowanym użytkownikiem. Jeżeli jeszcze nie posiadasz konta możesz je w bardzo prosty sposób założyć. Następnie musisz nieco poczekać aż zostaniesz pozytywnie zweryfikowany, o czym poinformujemy Cię mailowo. Następnie zaś możesz już korzystać bez ograniczeń. Dokładniejsze informacje o korzystaniu znajdują się w Pomocniczku</p>
+						<ul class="actions">
+							<li><a href="#" class="button">Pomocniczek</a></li>
+						</ul>
+					</div>
+					<a href="#four" class="goto-next scrolly">Następny</a>
+				</section>
+
+			<!-- Four -->
+				<section id="four" class="wrapper style1 special fade-up">
+					<div class="container">
+						<header class="major">
+							<h2>Kontakt</h2>
+							<p>W tym miejscu możesz napisać do nas wiadomość z jakimkolwiek trapiącym Cię problemem.</p>
+						</header>
+						<div class="box alt">
+							<form method="post" action="#">
+									<div class="fields">
+										<div class="field half">
+											<label for="name">Imię i nazwisko</label>
+											<input type="text" name="name" id="name" />
+										</div>
+										<div class="field half">
+											<label for="email">Email</label>
+											<input type="text" name="email" id="email" />
+										</div>
+										<div class="field">
+											<label for="message">Wiadomość</label>
+											<textarea name="message" id="message" rows="4"></textarea>
+										</div>
+									</div>
+									<ul class="actions">
+										<li><input type="submit" value="Wyślij" class="primary" /></li>
+										<li><input type="reset" value="Reset" /></li>
+									</ul>
+								</form>
+						</div>
+					</div>
+				</section>
+
+			<!-- Footer -->
+				<footer id="footer">
+					<ul class="icons">	
+						<li><a href="https://www.facebook.com/skpgharnasie" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+						<li><a href="https://www.instagram.com/skpg_harnasie/" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="mailto:kurs@skpg.gliwice.pl" class="icon solid alt fa-envelope"><span class="label">Email</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>&copy; AKO. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="js/assets/jquery.min.js"></script>
+			<script src="js/assets/jquery.scrolly.min.js"></script>
+			<script src="js/assets/jquery.dropotron.min.js"></script>
+			<script src="js/assets/jquery.scrollex.min.js"></script>
+			<script src="js/assets/browser.min.js"></script>
+			<script src="js/assets/breakpoints.min.js"></script>
+			<script src="js/assets/util.js"></script>
+			<script src="js/assets/main.js"></script>
+            <script src="js/auth.js"></script>
+
+	</body>
 </html>
