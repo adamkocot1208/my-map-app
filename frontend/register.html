@@ -9,7 +9,6 @@
 </head>
 <body class="is-preload landing">
     <div id="page-wrapper">
-
         <!-- Header -->
         <header id="header">
             <h1 id="logo">Geoportal SKPG Harnasie</h1>
@@ -93,6 +92,10 @@
     <script src="js/assets/util.js"></script>
     <script src="js/assets/main.js"></script>
     <script src="js/auth.js"></script>
-
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById('registerForm').reset();
+        });
+    </script>
 </body>
 </html>

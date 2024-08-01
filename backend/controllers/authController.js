@@ -37,9 +37,9 @@ exports.activateAccount = async (req, res) => {
 };
 
 exports.login = async (req, res) => {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
     try {
-        const user = await User.findByEmail(email);
+        const user = await User.findByUsername(username);
         if (!user) {
             return res.status(404).json({ msg: 'User not found' });
         }
