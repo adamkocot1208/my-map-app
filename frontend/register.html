@@ -1,82 +1,98 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<title>Harnasiowy Geoportal</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="css/styles.css" />
-		<noscript><link rel="stylesheet" href="css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload landing">
-		<div id="page-wrapper">
+<head>
+    <title>Harnasiowy Geoportal</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <noscript><link rel="stylesheet" href="css/noscript.css" /></noscript>
+</head>
+<body class="is-preload landing">
+    <div id="page-wrapper">
 
-			<!-- Header -->
-				<header id="header">
-					<h1 id="logo">Geoportal SKPG Harnasie</h1>
-					<nav id="nav">
-						<ul>
-                            <li><a href="/">Strona główna</a></li>
-							<li><a href="/#one">Co to?</a></li>
-							<li><a href="/#two">Autorzy</a></li>
-							<li><a href="/#three">Pomoc</a></li>
-							<li><a href="/#four">Kontakt</a></li>
-						</ul>
-					</nav>
-				</header>
+        <!-- Header -->
+        <header id="header">
+            <h1 id="logo">Geoportal SKPG Harnasie</h1>
+            <nav id="nav">
+                <ul>
+                    <li><a href="/">Strona główna</a></li>
+                    <li><a href="/#one">Co to?</a></li>
+                    <li><a href="/#two">Autorzy</a></li>
+                    <li><a href="/#three">Pomoc</a></li>
+                    <li><a href="/#four">Kontakt</a></li>
+                </ul>
+            </nav>
+        </header>
 
-			<!-- Banner -->
-            <section id="banner">
-                <div class="content">
-                    <div class="box alt">
-                        <form method="post" action="/api/register" id="registerForm">
-                                <div class="fields">
-                                    <div class="field">
-                                        <label for="email">Email</label>
-                                        <input type="text" name="email" id="email" placeholder=""/>
-                                    </div>
-                                    <div class="field">
-                                        <label for="username">Nazwa użytkownika</label>
-                                        <input type="text" name="username" id="username" placeholder=""/>
-                                    </div>
-                                    <div class="field">
-                                        <label for="password">Hasło</label>
-                                        <input type="password" name="password" id="password"placeholder="" />
-                                    </div>
+        <!-- Banner -->
+        <section id="banner">
+            <div class="content">
+                <div class="box alt">
+                    <form method="post" action="/api/register" id="registerForm">
+                        <div class="fields">
+                            <div class="field">
+                                <label for="email">Email</label>
+                                <div class="input-group">
+                                    <input type="email" name="email" id="email" placeholder="" required />
+                                    <span class="info-icon" title="Enter a valid email address.">
+                                        <img src="images/icons8-info-30.svg" alt="Info" />
+                                    </span>
                                 </div>
-                                    <input type="submit" value="Zarejestruj" class="primary" id="register"/>
-                        </form>
-                        <p>Jeśli posiadasz już konto możesz się zalogować <a href="/login">tutaj</a></p>
-                        <p>Jeśli zapomniałeś hasła do swojego konta możesz je odzyskać <a href="/reset-password">tutaj</a></p>
-                    </div>
+                                <div id="emailError" class="error-message"></div>
+                            </div>
+                            <div class="field">
+                                <label for="username">Nazwa użytkownika</label>
+                                <div class="input-group">
+                                    <input type="text" name="username" id="username" placeholder="" required minlength="3" maxlength="30" />
+                                    <span class="info-icon" title="Username must be between 3 and 30 characters.">
+                                        <img src="images/icons8-info-30.svg" alt="Info" />
+                                    </span>
+                                </div>
+                                <div id="usernameError" class="error-message"></div>
+                            </div>
+                            <div class="field">
+                                <label for="password">Hasło</label>
+                                <div class="input-group">
+                                    <input type="password" name="password" id="password" placeholder="" required minlength="8" />
+                                    <span class="info-icon" title="Password must be at least 8 characters long.">
+                                        <img src="images/icons8-info-30.svg" alt="Info" />
+                                    </span>
+                                </div>
+                                <div id="passwordError" class="error-message"></div>
+                            </div>
+                        </div>
+                        <input type="submit" value="Zarejestruj" class="primary" id="register" />
+                    </form>
+                    <p>Jeśli posiadasz już zweryfikowane konto możesz się zalogować <a href="/login">tutaj</a></p>
+                    <p>Jeśli zapomniałeś hasła do swojego konta możesz je odzyskać <a href="/reset-password">tutaj</a></p>
                 </div>
-            </section>
+            </div>
+        </section>
 
+        <!-- Footer -->
+        <footer id="footer">
+            <ul class="icons">
+                <li><a href="https://www.facebook.com/skpgharnasie" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+                <li><a href="https://www.instagram.com/skpg_harnasie/" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+                <li><a href="mailto:kurs@skpg.gliwice.pl" class="icon solid alt fa-envelope"><span class="label">Email</span></a></li>
+            </ul>
+            <ul class="copyright">
+                <li>&copy; AKO. All rights reserved.</li>
+                <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+            </ul>
+        </footer>
+    </div>
 
+    <!-- Scripts -->
+    <script src="js/assets/jquery.min.js"></script>
+    <script src="js/assets/jquery.scrolly.min.js"></script>
+    <script src="js/assets/jquery.dropotron.min.js"></script>
+    <script src="js/assets/jquery.scrollex.min.js"></script>
+    <script src="js/assets/browser.min.js"></script>
+    <script src="js/assets/breakpoints.min.js"></script>
+    <script src="js/assets/util.js"></script>
+    <script src="js/assets/main.js"></script>
+    <script src="js/auth.js"></script>
 
-			<!-- Footer -->
-				<footer id="footer">
-					<ul class="icons">	
-						<li><a href="https://www.facebook.com/skpgharnasie" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
-						<li><a href="https://www.instagram.com/skpg_harnasie/" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
-						<li><a href="mailto:kurs@skpg.gliwice.pl" class="icon solid alt fa-envelope"><span class="label">Email</span></a></li>
-					</ul>
-					<ul class="copyright">
-						<li>&copy; AKO. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-					</ul>
-				</footer>
-
-		</div>
-
-		<!-- Scripts -->
-			<script src="js/assets/jquery.min.js"></script>
-			<script src="js/assets/jquery.scrolly.min.js"></script>
-			<script src="js/assets/jquery.dropotron.min.js"></script>
-			<script src="js/assets/jquery.scrollex.min.js"></script>
-			<script src="js/assets/browser.min.js"></script>
-			<script src="js/assets/breakpoints.min.js"></script>
-			<script src="js/assets/util.js"></script>
-			<script src="js/assets/main.js"></script>
-            <script src="js/auth.js"></script>
-
-	</body>
+</body>
 </html>

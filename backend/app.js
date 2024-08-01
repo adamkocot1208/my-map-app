@@ -22,8 +22,9 @@ app.get('/register', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'frontend', 'register.html'));
 });
 
-app.get('/reset-password', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'frontend', 'reset-password.html'));
+// Serve the activation page
+app.get('/activate', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'frontend', 'activate.html'));
 });
 
 // Catch-all handler to serve the main frontend file
@@ -31,6 +32,5 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'frontend', 'index.html'));
 });
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-

@@ -3,6 +3,7 @@ const User = require('../models/User');
 const generateToken = require('../utils/generateToken');
 const verifyToken = require('../utils/verifyToken');
 const emailService = require('../utils/emailService');
+const path = require('path');
 
 exports.register = async (req, res) => {
     const { email, username, password } = req.body;
@@ -15,7 +16,7 @@ exports.register = async (req, res) => {
         const user = await User.create(email, username, hashedPassword);
 
         const token = generateToken(user.id);
-        const confirmationLink = `http://localhost:3000/activate/${token}`; //adres do zmiany
+        const confirmationLink = `http://localhost:5000/api/auth/activate/${token}`;
         await emailService.sendActivationEmail(email, confirmationLink);
 
         res.status(201).json({ msg: 'User registered successfully. Please check your email to activate your account.' });
@@ -29,7 +30,7 @@ exports.activateAccount = async (req, res) => {
     try {
         const { userId } = verifyToken(token);
         await User.confirmUser(userId);
-        res.status(200).json({ msg: 'Account activated successfully' });
+        res.redirect('/activate');
     } catch (error) {
         res.status(400).json({ msg: 'Invalid token' });
     }
@@ -41,6 +42,9 @@ exports.login = async (req, res) => {
         const user = await User.findByEmail(email);
         if (!user) {
             return res.status(404).json({ msg: 'User not found' });
+        }
+        if (!user.confirmed) {
+            return res.status(403).json({ msg: 'Please activate your account to log in.' });
         }
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
@@ -61,7 +65,7 @@ exports.sendPasswordResetEmail = async (req, res) => {
             return res.status(404).json({ msg: 'User not found' });
         }
         const token = generateToken(user.id);
-        const resetLink = `http://localhost:3000/reset-password/${token}`; //adres do zmiany
+        const resetLink = `http://localhost:5000/reset-password/${token}`;
         await emailService.sendPasswordResetEmail(email, resetLink);
         res.status(200).json({ msg: 'Password reset email sent' });
     } catch (error) {

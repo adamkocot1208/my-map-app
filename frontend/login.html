@@ -32,11 +32,23 @@
 									<div class="fields">
 										<div class="field">
 											<label for="username">Nazwa użytkownika</label>
-											<input type="text" name="username" id="username" />
+											<div class="input-group">
+												<input type="text" name="username" id="username" placeholder="" required minlength="3" maxlength="30" />
+												<span class="info-icon" title="Username must be between 3 and 30 characters.">
+													<img src="images/icons8-info-30.svg" alt="Info" />
+												</span>
+											</div>
+											<div id="usernameError" class="error-message"></div>
 										</div>
 										<div class="field">
 											<label for="password">Hasło</label>
-											<input type="password" name="password" id="password" />
+											<div class="input-group">
+												<input type="password" name="password" id="password" placeholder="" required minlength="8" />
+												<span class="info-icon" title="Password must be at least 8 characters long.">
+													<img src="images/icons8-info-30.svg" alt="Info" />
+												</span>
+											</div>
+											<div id="passwordError" class="error-message"></div>
 										</div>
 									</div>
 										<input type="submit" value="Zaloguj" class="primary" id="login" />

@@ -3702,7 +3702,35 @@ body.landing #header {
     max-width: 95%;
     padding: 6em;
     position: relative;
-    text-align: right;
+    vertical-align: middle;
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+.field {
+    margin-bottom: 1rem;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+}
+
+.input-group input {
+    flex: 1;
+}
+
+.input-group .info-icon {
+    margin-left: 0.5rem;
+    cursor: pointer;
+}
+
+#banner .content .box.alt .fields .field {
+    display: inline-block;
+    margin-right: 1%;
+    position: relative;
+    text-align: left;
     vertical-align: middle;
     z-index: 1;
 }
