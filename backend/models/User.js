@@ -19,6 +19,11 @@ class User {
         return result.rows[0];
     }
 
+    static async findByUsernameAndEmail(username, email) {
+        const result = await pool.query(`SELECT * FROM users WHERE username = $1 AND email = $2`, [username, email]);
+        return result.rows[0];
+    }
+
     static async findById(id) {
         const result = await pool.query(`SELECT * FROM users WHERE id = $1`, [id]);
         return result.rows[0];

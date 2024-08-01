@@ -8,8 +8,13 @@ const path = require('path');
 exports.register = async (req, res) => {
     const { email, username, password } = req.body;
     try {
-        if (await User.findByEmail(email) || await User.findByUsername(username)) {
-            return res.status(400).json({ msg: 'Email or username already exists' });
+        const existingUserByEmail = await User.findByEmail(email);
+        const existingUserByUsername = await User.findByUsername(username);
+        if (existingUserByEmail) {
+            return res.status(400).json({ msg: `Email already exists to ${email}` });
+        }
+        if (existingUserByUsername) {
+            return res.status(400).json({ msg: `Username already exists on ${username}` });
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -58,16 +63,20 @@ exports.login = async (req, res) => {
 };
 
 exports.sendPasswordResetEmail = async (req, res) => {
-    const { email } = req.body;
+    const { username, email } = req.body;
+
     try {
-        const user = await User.findByEmail(email);
-        if (!user) {
-            return res.status(404).json({ msg: 'User not found' });
+        const existingUserByUsername = await User.findByUsername(username);
+        if (!existingUserByUsername){
+            res.status(400).json({ msg: 'User not found' });
         }
-        const token = generateToken(user.id);
-        const resetLink = `http://localhost:5000/reset-password/${token}`;
-        await emailService.sendPasswordResetEmail(email, resetLink);
-        res.status(200).json({ msg: 'Password reset email sent' });
+        if (existingUserByUsername) {
+            const user = await User.findByUsername(username);
+            const token = generateToken(user.id);
+            const resetLink = `http://localhost:5000/set-new-password?token=${token}`;
+            await emailService.sendPasswordResetEmail(email, resetLink);
+            res.status(200).json({ msg: `Password reset email sent to ${user.email}` });
+        }
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
