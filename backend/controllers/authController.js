@@ -20,7 +20,7 @@ exports.register = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = await User.create(email, username, hashedPassword);
 
-        const token = generateToken(user.id);
+        const token = generateToken(user.id, '15m');
         const confirmationLink = `http://localhost:5000/api/auth/activate/${token}`;
         await emailService.sendActivationEmail(email, confirmationLink);
 
@@ -56,7 +56,19 @@ exports.login = async (req, res) => {
             return res.status(400).json({ msg: 'Invalid credentials' });
         }
         const token = generateToken(user.id);
+        await User.updateLastLogged(user.id, token);
         res.status(200).json({ token });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+exports.logout = async (req, res) => {
+    const { token } = req.body; 
+    try {
+        const { userId } = verifyToken(token);
+        await User.updateLastLogged(userId, 'notLogged');
+        res.status(200).json({ msg: 'Logged out successfully' });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -72,7 +84,7 @@ exports.sendPasswordResetEmail = async (req, res) => {
         }
         if (existingUserByUsername) {
             const user = await User.findByUsername(username);
-            const token = generateToken(user.id);
+            const token = generateToken(user.id, '10m');
             const resetLink = `http://localhost:5000/set-new-password?token=${token}`;
             await emailService.sendPasswordResetEmail(email, resetLink);
             res.status(200).json({ msg: `Password reset email sent to ${user.email}` });
@@ -91,5 +103,25 @@ exports.resetPassword = async (req, res) => {
         res.status(200).json({ msg: 'Password reset successfully' });
     } catch (error) {
         res.status(400).json({ msg: 'Invalid token' });
+    }
+};
+
+exports.sendMessage = async (req, res) => {
+    const { email, surname, topic, message } = req.body;
+    try {
+        const adminEmail = process.env.ADMIN_EMAIL;
+        await emailService.sendEmail(
+            adminEmail,
+            `New message from ${surname}`,
+            `Email: ${email}\nTopic: ${topic}\nMessage: ${message}`
+        );
+        await emailService.sendEmail(
+            email,
+            'Your message has been received',
+            `${surname} thank you for contacting us. We have received your message:\n\nTopic: ${topic}\nMessage: ${message}\n\nWe will get back to you soon.`
+        );
+        res.status(200).json({ msg: 'Message sent successfully' });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
 };

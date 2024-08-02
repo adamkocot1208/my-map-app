@@ -39,8 +39,16 @@ class User {
 
     static async confirmUser(id) {
         const result = await pool.query(
-            `UPDATE users SET confirmed = true WHERE id = $1 RETURNING *`,
+            `UPDATE users SET confirmed = true, lastLogged = NOW(), token = 'notLogged' WHERE id = $1 RETURNING *`,
             [id]
+        );
+        return result.rows[0];
+    }
+
+    static async updateLastLogged(id, token = 'notLogged') {
+        const result = await pool.query(
+            `UPDATE users SET lastLogged = NOW(), token = $2 WHERE id = $1 RETURNING *`,
+            [id, token]
         );
         return result.rows[0];
     }

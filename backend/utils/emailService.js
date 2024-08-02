@@ -13,7 +13,7 @@ exports.sendActivationEmail = async (email, activationLink) => {
         from: process.env.EMAIL_USER,
         to: email,
         subject: 'Account Activation',
-        text: `Click the following link to activate your account: ${activationLink}`
+        text: `Click the following link to activate your account: ${activationLink} \n This link is only valid for 10 minutes`
     };
     await transporter.sendMail(mailOptions);
 };
@@ -23,7 +23,22 @@ exports.sendPasswordResetEmail = async (email, resetLink) => {
         from: process.env.EMAIL_USER,
         to: email,
         subject: 'Password Reset',
-        text: `Click the following link to reset your password: ${resetLink}`
+        text: `Click the following link to reset your password: ${resetLink} \n This link is only valid for 10 minutes`
     };
     await transporter.sendMail(mailOptions);
+};
+
+exports.sendEmail = async (to, subject, text) => {
+    const mailOptions = {
+        from: process.env.EMAIL_USER,
+        to,
+        subject,
+        text
+    };
+    try {
+        await transporter.sendMail(mailOptions);
+    } catch (error) {
+        console.error('Error sending email:', error);
+        throw error;
+    }
 };

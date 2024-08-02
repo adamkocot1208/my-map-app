@@ -38,6 +38,14 @@ app.get('/map', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'frontend', 'map.html'));
 });
 
+app.get('/help', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'frontend', 'help.html'));
+});
+
+app.get('/kontakt', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'frontend', 'kontakt.html'));
+});
+
 // Catch-all handler to serve the main frontend file
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'frontend', 'index.html'));

@@ -19,8 +19,8 @@
 							<li><a href="#two">Autorzy</a></li>
 							<li><a href="#three">Pomoc</a></li>
 							<li><a href="#four">Kontakt</a></li>
-							<li><a href="/login" class="button primary">Zaloguj</a></li>
-							<li><a href="/register" class="button primary">Zarejestruj</a></li>
+							<li><a href="/login" class="button primary" id="loginButton">Zaloguj</a></li>
+							<li><a href="/register" class="button primary" id="registerButton">Zarejestruj</a></li>
 						</ul>
 					</nav>
 				</header>
@@ -101,26 +101,54 @@
 							<p>W tym miejscu możesz napisać do nas wiadomość z jakimkolwiek trapiącym Cię problemem.</p>
 						</header>
 						<div class="box alt">
-							<form method="post" action="#">
-									<div class="fields">
-										<div class="field half">
-											<label for="name">Imię i nazwisko</label>
-											<input type="text" name="name" id="name" />
-										</div>
-										<div class="field half">
-											<label for="email">Email</label>
-											<input type="text" name="email" id="email" />
-										</div>
-										<div class="field">
-											<label for="message">Wiadomość</label>
-											<textarea name="message" id="message" rows="4"></textarea>
-										</div>
-									</div>
-									<ul class="actions">
-										<li><input type="submit" value="Wyślij" class="primary" /></li>
-										<li><input type="reset" value="Reset" /></li>
-									</ul>
-								</form>
+                            <form method="post" action="/api/sendMessage" id="messageForm">
+                                <div class="fields">
+                                    <div class="field">
+                                        <label for="email">Email</label>
+                                        <div class="input-group">
+                                            <input type="email" name="email" id="email" placeholder="" required />
+                                            <span class="info-icon" title="Podaj swój adres email">
+                                                <img src="images/icons8-info-30.svg" alt="Info" />
+                                            </span>
+                                        </div>
+                                        <div id="usernameError" class="error-message"></div>
+                                    </div>
+                                    <div class="field">
+                                        <label for="surname">Imię i nazwisko</label>
+                                        <div class="input-group">
+                                            <input type="text" name="surname" id="surname" placeholder="" required />
+                                            <span class="info-icon" title="Dla lepszego kontaktu podaj swoje imię i nazwisko">
+                                                <img src="images/icons8-info-30.svg" alt="Info" />
+                                            </span>
+                                        </div>
+                                        <div id="surnameError" class="error-message"></div>
+                                    </div>
+                                    <div class="field">
+                                        <label for="surname">Temat</label>
+                                        <div class="input-group">
+                                            <input type="text" name="topic" id="topic" placeholder="" required />
+                                            <span class="info-icon" title="Podaj temat wiadomości">
+                                                <img src="images/icons8-info-30.svg" alt="Info" />
+                                            </span>
+                                        </div>
+                                        <div id="topicError" class="error-message"></div>
+                                    </div>
+                                    <div class="field">
+                                        <label for="message">Wiadomosc</label>
+                                        <div class="input-group">
+                                            <textarea name="message" id="message" placeholder="" rows="4" required ></textarea>
+                                            <span class="info-icon" title="Tutaj wpisz treść wiadomości">
+                                                <img src="images/icons8-info-30.svg" alt="Info" />
+                                            </span>
+                                        </div>
+                                        <div id="messageError" class="error-message"></div>
+                                    </div>
+                                </div>
+                                <ul class="actions">
+                                    <li><input type="submit" value="Wyślij" class="primary" id="sendMessage"/></li>
+                                    <li><input type="reset" value="Reset" id="resetMessage" /></li>
+                                </ul>
+                            </form>
 						</div>
 					</div>
 				</section>
