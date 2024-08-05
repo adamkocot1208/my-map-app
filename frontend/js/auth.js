@@ -5,8 +5,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const newPasswordForm = document.getElementById('newPasswordForm');
     const logoutButton = document.getElementById('logoutButton');
     const messageForm = document.getElementById('messageForm');
-    const loginButton = document.getElementById('loginButton');
-    const registerButton = document.getElementById('registerButton');
 
     if (registerForm) {
         registerForm.reset();
