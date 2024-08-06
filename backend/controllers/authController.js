@@ -67,7 +67,7 @@ exports.logout = async (req, res) => {
     const { token } = req.body; 
     try {
         const { userId } = verifyToken(token);
-        await User.updateLastLogged(userId, 'notLogged');
+        await User.updateLastLogged(userId, null);
         res.status(200).json({ msg: 'Logged out successfully' });
     } catch (error) {
         res.status(500).json({ error: error.message });
