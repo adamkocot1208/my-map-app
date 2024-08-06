@@ -1,3 +1,26 @@
+function setCookie(name, value, days, sameSite = 'Lax') {
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    const expires = "expires=" + date.toUTCString();
+    const sameSiteAttr = "SameSite=" + sameSite;
+    document.cookie = name + "=" + value + ";" + expires + ";path=/;" + sameSiteAttr;
+}
+
+function getCookie(name) {
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+}
+
+function eraseCookie(name) {
+    document.cookie = name + '=; Max-Age=-99999999;';
+}
+
 document.addEventListener("DOMContentLoaded", function() {
     const registerForm = document.getElementById('registerForm');
     const loginForm = document.getElementById('loginForm');
@@ -83,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     if (data.msg === 'Please activate your account to log in.') {
                         alert(data.msg);
                     } else {
-                        localStorage.setItem('token', data.token);
+                        setCookie('token', data.token, 1, 'None; Secure');
                         window.location.href = '/map';
                     }
                 }
@@ -175,7 +198,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if (logoutButton) {
         logoutButton.addEventListener('click', async () => {
-            const token = localStorage.getItem('token');
+            const token = getCookie('token');
             try {
                 const response = await fetch('/api/auth/logout', {
                     method: 'POST',
@@ -184,8 +207,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
                 const data = await response.json();
                 alert(data.msg);
-                localStorage.removeItem('token');
-                localStorage.removeItem('userId');
+                eraseCookie('token');
                 window.location.href = '/';
             } catch (err) {
                 console.error('Error:', err);
