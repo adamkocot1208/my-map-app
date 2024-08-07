@@ -42,8 +42,8 @@ app.get('/help', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'frontend', 'help.html'));
 });
 
-app.get('/kontakt', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'frontend', 'kontakt.html'));
+app.get('/contact', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'frontend', 'contact.html'));
 });
 
 // Catch-all handler to serve the main frontend file
