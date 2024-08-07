@@ -1,12 +1,11 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-        window.location.href = 'login.html';
-    }
+// Dodane w całości
+document.addEventListener('DOMContentLoaded', (event) => {
+    // Inicjalizacja mapy
+    var map = L.map('map').setView([51.505, -0.09], 13);
 
-    const map = L.map('map').setView([51.505, -0.09], 13);
-
+    // Dodanie warstwy mapy
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors'
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
+
 });

@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <link rel="stylesheet" href="css/styles.css" />
         <noscript><link rel="stylesheet" href="css/noscript.css" /></noscript>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     </head>
 <body class="is-preload landing">
     <div id="page-wrapper">
@@ -22,12 +23,7 @@
         </header>
         <!-- Banner -->
         <section id="banner">
-            <div class="content">
-                <div class="box alt">
-                    <h1>!!! GRATULACJE !!!</h1>
-                    <p>Tutaj będzie mapa</p>
-                </div>
-            </div>
+            <div id="map"></div>
         </section>
         <!-- Footer -->
         <footer id="footer">
@@ -51,5 +47,7 @@
     <script src="js/assets/util.js"></script>
     <script src="js/assets/main.js"></script>
     <script src="js/auth.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="js/map.js"></script>
 </body>
 </html>
