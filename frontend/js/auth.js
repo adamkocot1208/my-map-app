@@ -21,13 +21,38 @@ function eraseCookie(name) {
     document.cookie = name + '=; Max-Age=-99999999;';
 }
 
+function isLoggedIn(token) {
+    return token !== null && token !== '';
+}
+
+function handleLogin(token) {
+    if (isLoggedIn(token)) {
+        window.location.href = '/map';
+    } else {
+        window.location.href = '/login';
+    }
+}
+
+function handleRegister(token) {
+    if (isLoggedIn(token)) {
+        window.location.href = '/map';
+    } else {
+        window.location.href = '/register';
+    }
+}
+
 document.addEventListener("DOMContentLoaded", function() {
+    //formularze
     const registerForm = document.getElementById('registerForm');
     const loginForm = document.getElementById('loginForm');
     const resetPasswordForm = document.getElementById('resetPasswordForm');
     const newPasswordForm = document.getElementById('newPasswordForm');
-    const logoutButton = document.getElementById('logoutButton');
     const messageForm = document.getElementById('messageForm');
+
+    //przyciski
+    const logoutButton = document.getElementById('logoutButton');
+    const loginButton = document.getElementById('loginButton');
+    const registerButton = document.getElementById('registerButton');
 
     if (registerForm) {
         registerForm.reset();
@@ -196,25 +221,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    if (logoutButton) {
-        logoutButton.addEventListener('click', async () => {
-            const token = getCookie('token');
-            try {
-                const response = await fetch('/api/auth/logout', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ token })
-                });
-                const data = await response.json();
-                alert(data.msg);
-                eraseCookie('token');
-                window.location.href = '/';
-            } catch (err) {
-                console.error('Error:', err);
-            }
-        });
-    }
-
     if (messageForm) {
         messageForm.reset();
         messageForm.addEventListener('submit', async (e) => {
@@ -260,4 +266,48 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     }
+
+    if (logoutButton) {
+        logoutButton.addEventListener('click', async () => {
+            const token = getCookie('token');
+            try {
+                const response = await fetch('/api/auth/logout', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ token })
+                });
+                const data = await response.json();
+                alert(data.msg);
+                eraseCookie('token');
+                window.location.href = '/';
+            } catch (err) {
+                console.error('Error:', err);
+            }
+        });
+    }
+
+    if (loginButton) {
+        loginButton.addEventListener('click', async (event) => {
+            event.preventDefault();
+            try {
+                const token = getCookie('token');
+                handleLogin(token);
+            } catch (err) {
+                window.location.href = '/login';
+            }
+        });
+    }
+
+    if (registerButton) {
+        registerButton.addEventListener('click', async (event) => {
+            event.preventDefault();
+            try {
+                const token = getCookie('token');
+                handleRegister(token);
+            } catch (err) {
+                window.location.href = '/register';
+            }
+        });
+    }
+
 });
