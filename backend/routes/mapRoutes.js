@@ -5,9 +5,8 @@ const mapController = require('../controllers/mapController');
 
 const router = express.Router();
 
-/**
- * Route to get train stations and stops.
- */
 router.get('/api/trainStationsAndStops', mapController.getTrainStationsAndStops);
+router.get('/api/trainLines', mapController.getTrainLines);
+router.get('/api/balonsPhysographicAreas', mapController.getBalonsPhysographicAreas);
 
 module.exports = router;

@@ -7,7 +7,7 @@ const db = require('../db'); // Assuming you have a db.js for database connectio
  */
 function getTrainStationsAndStops(callback) {
     const query = `
-        SELECT id, ST_AsText(ST_Transform(geom, 4326)) as geom, full_id, railway, name, typ
+        SELECT id, ST_AsText(ST_Transform(geom, 4326)) as geom, railway, name
         FROM i_kolej_stacje_przystanki
     `;
     db.query(query, (err, results) => {
@@ -22,6 +22,41 @@ function getTrainStationsAndStops(callback) {
     });
 }
 
+/**
+ * Get train lines.
+ */
+function getTrainLines(callback) {
+    const query = `
+        SELECT id, ST_AsText(ST_Transform(geom, 4326)) as geom, nr, elektr
+        FROM i_linie_kolejowe
+    `;
+    db.query(query, (err, results) => {
+        if (err) {
+            return callback(err);
+        }
+        callback(null, results.rows);
+    });
+}
+
+/**
+ * Get physograpic area (Balon).
+ */
+function getBalonsPhysographicAreas(callback) {
+    const query = `
+        SELECT id, ST_AsText(ST_Transform(geom, 4326)) as geom, name, layer
+        FROM i_podzial_fizjograficzny_balon
+    `;
+    db.query(query, (err, results) => {
+        if (err) {
+            return callback(err);
+        }
+        callback(null, results.rows);
+
+    });
+}
+
 module.exports = {
     getTrainStationsAndStops,
+    getTrainLines,
+    getBalonsPhysographicAreas
 };
