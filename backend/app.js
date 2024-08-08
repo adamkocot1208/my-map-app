@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const authRoutes = require('./routes/authRoutes');
+const mapRoutes = require('./routes/mapRoutes');
 
 // Middleware to parse JSON requests
 app.use(express.json());
@@ -12,6 +13,7 @@ app.use(express.static(path.join(__dirname, '..', 'frontend')));
 
 // API routes
 app.use('/api/auth', authRoutes);
+app.use('/', mapRoutes);
 
 // Serve specific HTML files for login, register, reset password, and set new password
 app.get('/login', (req, res) => {
@@ -36,6 +38,10 @@ app.get('/activate', (req, res) => {
 
 app.get('/map', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'frontend', 'map.html'));
+});
+
+app.get('/panorama', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'frontend', 'panorama.html'));
 });
 
 app.get('/help', (req, res) => {
