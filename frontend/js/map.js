@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     mapContainer.style.width = '100%';
     mapContainer.style.height = '100%';
 
-    var bannerSection = document.getElementById('banner');
+    var bannerSection = document.getElementById('banner2');
     var boxAlt = bannerSection.querySelector('.box.alt');
     boxAlt.innerHTML = ''; // Clear the placeholder text
     boxAlt.appendChild(mapContainer);
