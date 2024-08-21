@@ -21,13 +21,9 @@
 
 #banner2:after {
     background-image: -moz-linear-gradient(top, rgba(23, 24, 32, 0.95), rgba(23, 24, 32, 0.95));
-    ;
     background-image: -webkit-linear-gradient(top, rgba(23, 24, 32, 0.95), rgba(23, 24, 32, 0.95));
-    ;
     background-image: -ms-linear-gradient(top, rgba(23, 24, 32, 0.95), rgba(23, 24, 32, 0.95));
-    ;
     background-image: linear-gradient(top, rgba(23, 24, 32, 0.95), rgba(23, 24, 32, 0.95));
-    ;
     content: '';
     display: block;
     left: 0;
@@ -42,9 +38,7 @@
     align-items: center;
     height: calc(100vh - 2em);
     width: 100vw;
-    /* Adjust for any header/footer */
     padding: 0 1em 2em 1em;
-    /* Add margin around the map */
 }
 
 #banner2 .map-container {

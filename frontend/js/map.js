@@ -130,8 +130,68 @@ fetch('/api/balonsPhysographicAreas')
         .catch(error => console.error('Error fetching balonsPhysographicAreas:', error));
 
     // Layer control
+    /*
     trainStationsAndStopsLayer.addTo(map);
     trainLinesLayer.addTo(map);
     balonsPhysographicAreasLayer.addTo(map);
+    */
 
+    var beskidSlaski = L.geoJson(null, { style: { color: '#ff0000' }});
+    var beskidZywiecki = L.geoJson(null, { style: { color: '#00ff00' }});
+
+    var baseTree = {
+        label: 'Warstwy podkładowe',
+        children: [
+            { label: 'OSM', layer: osm },
+            { label: 'OSM HOT', layer: osmHOT }
+        ]
+    };
+
+    var overlaysTree = {
+        label: 'Warstwy wektorowe',
+        children: [
+            {
+                label: 'Beskid Śląski',
+                children: [
+                    { label: 'Beskid Śląski', layer: beskidSlaski }
+                ]
+            },
+            {
+                label: 'Beskid Żywiecki',
+                children: [
+                    { label: 'Beskid Żywiecki', layer: beskidZywiecki }
+                ]
+            },
+            {
+                label: 'Inne',
+                children: [
+                    {
+                        label: 'Kolej',
+                        children: [
+                            { label: 'Stacje i przystanki kolejowe', layer: trainStationsAndStopsLayer },
+                            { label: 'Linie kolejowe', layer: trainLinesLayer }
+                        ]
+                    },
+                    {
+                        label: 'Przyroda',
+                        children: [
+                            { label: 'Warstwa Przyroda X', layer: null } // Replace null with actual layer
+                        ]
+                    },
+                    {
+                        label: 'Inne',
+                        children: [
+                            { label: 'Podział fizjograficzny Balona', layer: balonsPhysographicAreasLayer }
+                        ]
+                    }
+                ]
+            }
+        ]
+    };
+
+    var control = L.control.layers.tree(baseTree, overlaysTree, {
+        collapsed: false,
+    }).addTo(map);
+
+    control.collapseTree().expandSelected();
 });
