@@ -14,6 +14,7 @@
         "express": "^4.19.2",
         "express-validator": "^7.1.0",
         "jsonwebtoken": "^8.5.1",
+        "leaflet.control.layers.tree": "^1.1.0",
         "nodemailer": "^6.9.14",
         "pg": "^8.12.0",
         "wellknown": "^0.5.0"

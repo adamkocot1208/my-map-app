@@ -11,8 +11,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var map = L.map('map').setView([49.64,19.12], 12);
 
-    // warstwy podkładu
+    //-----------------------------------------------------------------------------------------------//
 
+    // warstwy podkładu
     var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
@@ -21,34 +22,9 @@ document.addEventListener('DOMContentLoaded', function() {
         maxZoom: 19,
         attribution: '© OpenStreetMap contributors, Tiles style by Humanitarian OpenStreetMap Team hosted by OpenStreetMap France'});
 
-    // Define layer groups
-    var trainStationsAndStopsLayer = L.layerGroup();
-    var trainLinesLayer = L.layerGroup();
-    var balonsPhysographicAreasLayer = L.layerGroup();
-
-     // definicje stylu
- const stationIcon = L.divIcon({
-    className: 'custom-div-icon',
-    html: "<div style='background-color:black; width:12px; height:12px; border-radius: 50%;'></div>",
-    iconSize: [12, 12],
-    iconAnchor: [6, 6]
-});
-
-const stopIcon = L.divIcon({
-    className: 'custom-div-icon',
-    html: "<div style='background-color:white; width:12px; height:12px; border:2px solid black; border-radius: 50%;'></div>",
-    iconSize: [12, 12],
-    iconAnchor: [6, 6]
-});
-
-const nonStopIcon = L.divIcon({
-    className: 'custom-div-icon',
-    html: "<div style='background-color:grey; width:12px; height:12px; border:2px solid black; border-radius: 50%;'></div>",
-    iconSize: [12, 12],
-    iconAnchor: [6, 6]
-});
-    
 // point - stacje i przystanki
+var trainStationsAndStopsLayer = L.layerGroup();
+
 fetch('/api/trainStationsAndStops')
 .then(response => response.json())
 .then(data => {
@@ -73,6 +49,8 @@ fetch('/api/trainStationsAndStops')
 
 
 // line - linie kolejowe
+var trainLinesLayer = L.layerGroup();
+
 fetch('/api/trainLines')
         .then(response => response.json())
         .then(data => {
@@ -104,6 +82,8 @@ fetch('/api/trainLines')
         .catch(error => console.error('Error fetching train lines:', error));
 
 // poligony - podzial fizjograficzny Balona
+var balonsPhysographicAreasLayer = L.layerGroup();
+
 fetch('/api/balonsPhysographicAreas')
         .then(response => response.json())
         .then(data => {
@@ -129,9 +109,31 @@ fetch('/api/balonsPhysographicAreas')
         })
         .catch(error => console.error('Error fetching balonsPhysographicAreas:', error));
 
-    // Layer control
-    trainStationsAndStopsLayer.addTo(map);
-    trainLinesLayer.addTo(map);
-    balonsPhysographicAreasLayer.addTo(map);
+         // definicje stylu
+ const stationIcon = L.divIcon({
+    className: 'custom-div-icon',
+    html: "<div style='background-color:black; width:12px; height:12px; border-radius: 50%;'></div>",
+    iconSize: [12, 12],
+    iconAnchor: [6, 6]
+});
 
+const stopIcon = L.divIcon({
+    className: 'custom-div-icon',
+    html: "<div style='background-color:white; width:12px; height:12px; border:2px solid black; border-radius: 50%;'></div>",
+    iconSize: [12, 12],
+    iconAnchor: [6, 6]
+});
+
+const nonStopIcon = L.divIcon({
+    className: 'custom-div-icon',
+    html: "<div style='background-color:grey; width:12px; height:12px; border:2px solid black; border-radius: 50%;'></div>",
+    iconSize: [12, 12],
+    iconAnchor: [6, 6]
+});
+   
+//-----------------------------------------------------------------------------------------------//
+
+trainStationsAndStopsLayer.addTo(map);
+trainLinesLayer.addTo(map);
+balonsPhysographicAreasLayer.addTo(map);
 });

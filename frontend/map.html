@@ -28,16 +28,64 @@
         <section id="banner2">
             <nav id="map-nav" class="map-nav">
                 <ul>
-                    <li><a href="#">Edycja</a></li>
-                    <li><a href="#">Dodaj obiekt</a></li>
-                    <li><a href="#">Usuń obiekt</a></li>
+                    <li><a href="#">Edycja</a>
+                        <ul class="dropdown">
+                            <li><a href="#">Option 1</a></li>
+                            <li><a href="#">Option 2</a></li>
+                            <li><a href="#">Option 3</a></li>
+                            <li><a href="#">Option 4</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Dodaj obiekt</a>
+                        <ul class="dropdown">
+                            <li><a href="#">Option 1</a></li>
+                            <li><a href="#">Option 2</a></li>
+                            <li><a href="#">Option 3</a></li>
+                            <li><a href="#">Option 4</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Usuń obiekt</a>
+                        <ul class="dropdown">
+                            <li><a href="#">Option 1</a></li>
+                            <li><a href="#">Option 2</a></li>
+                            <li><a href="#">Option 3</a></li>
+                            <li><a href="#">Option 4</a></li>
+                        </ul>
+                    </li>
                     <li><a href="#">Drukuj</a></li>
                 </ul>
             </nav>
             <div class="content2">
-
+                <div id="legend-container" class="legend-container">
+                    <div id="legend">
+                        <h6>Warstwy główne:</h6>
+                        <ul class="layer-list">
+                            <li>
+                                <input type="checkbox" id="mainLayer1" name="mainLayer1" onclick="toggleMainLayer('mainLayer1', ['subLayer1', 'subLayer2'])">
+                                <label for="mainLayer1">Warstwa główna 1</label>
+                                <ul>
+                                    <li>
+                                        <input type="checkbox" id="subLayer1" name="subLayer1" onclick="toggleLayer('subLayer1')">
+                                        <label for="subLayer1">Beskid Śląski - Warstwa 1</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="subLayer2" name="subLayer2" onclick="toggleLayer('subLayer2')">
+                                        <label for="subLayer2">Beskid Śląski - Warstwa 2</label>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="mainLayer2" name="mainLayer2" onclick="toggleMainLayer('mainLayer2', [])">
+                                <label for="mainLayer2">Warstwa główna 2</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="mainLayer3" name="mainLayer3" onclick="toggleMainLayer('mainLayer3', [])">
+                                <label for="mainLayer3">Warstwa główna 3</label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
                 <div class="box alt map-container">
-                    <!-- The map will be embedded here -->
                     <div id="map"></div>
                 </div>
             </div>
