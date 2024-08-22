@@ -36,23 +36,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 2em);
+    height: calc(100vh - 8em);
     width: 100vw;
     padding: 0 1em 2em 1em;
 }
 
 #banner2 .map-container {
     flex-grow: 1;
-    width: 100%;
+    width: 80%;
     height: 100%;
     margin: 0;
     padding: 0;
-    border: 2px solid #e44c65;
-    border-radius: 8px;
     overflow: hidden;
     display: flex;
-    justify-content: center;
+    justify-content: right;
     align-items: center;
+    border: 1px solid #e44c65;
 }
 
 #banner2 .map-container #map {
@@ -62,9 +61,31 @@
     padding: 0;
 }
 
+#banner2 .legend-container {
+    width: 20%;
+    height: 100%;
+    background-color: #f0f0f0;
+    /* Szare tło */
+    margin: 0;
+    padding: 0.5em;
+    border: 1px solid #e44c65;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+#banner2 .legend-container #legend {
+    width: 100%;
+    height: 100%;
+    text-align: left;
+    color: #000000;
+
+}
+
+
 .map-nav {
     background-color: #272833;
-    border: 2px solid #e44c65;
+    border: 1px solid #e44c65;
     border-radius: 8px;
     text-align: center;
     margin: 2em 1em 0em 1em;
@@ -89,4 +110,103 @@
     border-radius: 5px;
     border: 0;
     transition: background-color 0.3s ease;
+}
+
+/* Ukryj listę z opcjami domyślnie */
+.map-nav ul li ul.dropdown {
+    display: none;
+    position: absolute;
+    background-color: #272833;
+    border: 2px solid #e44c65;
+    border-radius: 8px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-align: left;
+    z-index: 1100;
+}
+
+/* Pokaż listę po najechaniu na "Dodaj obiekt" */
+.map-nav ul li:hover ul.dropdown {
+    display: block;
+}
+
+/* Style dla elementów w rozwijanej liście */
+.map-nav ul li ul.dropdown li {
+    padding: 0.5em;
+    margin: 0;
+}
+
+#banner2 .legend-container {
+    width: 20%;
+    height: 100%;
+    background-color: #272833;
+    margin: 0;
+    padding: 0.5em;
+    border: 1px solid #e44c65;
+    display: flex;
+    justify-content: left;
+    align-items: flex-start;
+    overflow-y: auto;
+    overflow-x: auto;
+    /* Dodaje przewijanie, jeśli zawartość przekracza wysokość */
+}
+
+#banner2 .legend-container #legend {
+    width: 100%;
+    height: 100%;
+    text-align: left;
+    color: #000000;
+}
+
+#banner2 .legend-container h6 {
+    text-align: left;
+    color: #e44c65;
+    font-size: 1em;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+#banner2 .legend-container .layer-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#banner2 .legend-container .layer-list li {
+
+    text-align: left;
+}
+
+#banner2 .legend-container .layer-list label {
+
+    color: #ffffff;
+    font-size: 0.75em;
+    vertical-align: middle;
+}
+
+#banner2 .legend-container .layer-list input[type="checkbox"] {
+    transform: scale(0.8);
+    /* Zwiększa rozmiar checkboxa */
+    -webkit-transform: scale(0.8);
+
+    vertical-align: middle;
+    accent-color: black;
+    /* Kolor checkboxa */
+}
+
+/* Style dla podlisty */
+#banner2 .legend-container .layer-list ul {
+    list-style-type: none;
+    padding-left: 1em;
+    margin-top: 0.5em;
+}
+
+.layer-list ul {
+    display: none;
+}
+
+/* Styl dla widocznej podlisty */
+.layer-list ul.show {
+    display: block;
 }
