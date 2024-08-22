@@ -207,3 +207,12 @@
     padding-left: 1em;
     margin-top: 0.5em;
 }
+
+.layer-list ul {
+    display: none;
+}
+
+/* Styl dla widocznej podlisty */
+.layer-list ul.show {
+    display: block;
+}

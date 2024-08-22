@@ -1,106 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <title>Harnasiowy Geoportal</title>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
     <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="css/map_styles.css" /> <!-- Link to the new map_styles.css -->
+    <link rel="stylesheet" href="css/map_styles.css" />
+    <!-- Link to the new map_styles.css -->
     <noscript><link rel="stylesheet" href="css/noscript.css" /></noscript>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-</head>
-<body class="is-preload landing">
+  </head>
+  <body class="is-preload landing">
     <div id="page-wrapper">
-        <!-- Header -->
-        <header id="header">
-            <h1 id="username" text-align="centre">Geoportal SKPG Harnasie</h1>
-            <nav id="nav">
-                <ul>
-                    <li><a href="/">Strona główna</a></li>
-                    <li><a href="/panorama">Panoramki</a></li>
-                    <li><a href="/help">Pomoc</a></li>
-                    <li><a href="/contact">Kontakt</a></li>
-                    <li><button id="logoutButton" class="button primary">Wyloguj się</button></li>
-                </ul>
-            </nav>
-        </header>
-        <!-- Banner -->
-        <section id="banner2">
-            <nav id="map-nav" class="map-nav">
-                <ul>
-                    <li><a href="#">Edycja</a>
-                        <ul class="dropdown">
-                            <li><a href="#">Option 1</a></li>
-                            <li><a href="#">Option 2</a></li>
-                            <li><a href="#">Option 3</a></li>
-                            <li><a href="#">Option 4</a></li>
-                        </ul>
+      <!-- Header -->
+      <header id="header">
+        <h1 id="username" text-align="centre">Geoportal SKPG Harnasie</h1>
+        <nav id="nav">
+          <ul>
+            <li><a href="/">Strona główna</a></li>
+            <li><a href="/panorama">Panoramki</a></li>
+            <li><a href="/help">Pomoc</a></li>
+            <li><a href="/contact">Kontakt</a></li>
+            <li>
+              <button id="logoutButton" class="button primary">
+                Wyloguj się
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <!-- Banner -->
+      <section id="banner2">
+        <nav id="map-nav" class="map-nav">
+          <ul>
+            <li>
+              <a href="#">Edycja</a>
+              <ul class="dropdown">
+                <li><a href="#">Option 1</a></li>
+                <li><a href="#">Option 2</a></li>
+                <li><a href="#">Option 3</a></li>
+                <li><a href="#">Option 4</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#">Dodaj obiekt</a>
+              <ul class="dropdown">
+                <li><a href="#">Option 1</a></li>
+                <li><a href="#">Option 2</a></li>
+                <li><a href="#">Option 3</a></li>
+                <li><a href="#">Option 4</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#">Usuń obiekt</a>
+              <ul class="dropdown">
+                <li><a href="#">Option 1</a></li>
+                <li><a href="#">Option 2</a></li>
+                <li><a href="#">Option 3</a></li>
+                <li><a href="#">Option 4</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Drukuj</a></li>
+          </ul>
+        </nav>
+        <div class="content2">
+          <div id="legend-container" class="legend-container">
+            <div id="legend">
+              <h6>Warstwy główne:</h6>
+              <ul class="layer-list">
+                <li>
+                  <input
+                    type="checkbox"
+                    id="mainLayer1"
+                    name="mainLayer1"
+                    onclick="toggleSubLayers('mainLayer1-subLayers', this)"
+                  />
+                  <label for="mainLayer1">Beskid Śląski</label>
+                  <ul id="mainLayer1-subLayers" style="display: none">
+                    <li>
+                      <input
+                        type="checkbox"
+                        id="subLayer1_1"
+                        name="subLayer1_1"
+                      />
+                      <label for="subLayer1_1">Beskid Śląski - Warstwa 1</label>
                     </li>
-                    <li><a href="#">Dodaj obiekt</a>
-                        <ul class="dropdown">
-                            <li><a href="#">Option 1</a></li>
-                            <li><a href="#">Option 2</a></li>
-                            <li><a href="#">Option 3</a></li>
-                            <li><a href="#">Option 4</a></li>
-                        </ul>
+                    <li>
+                      <input
+                        type="checkbox"
+                        id="subLayer1_2"
+                        name="subLayer1_2"
+                      />
+                      <label for="subLayer1_2">Beskid Śląski - Warstwa 2</label>
                     </li>
-                    <li><a href="#">Usuń obiekt</a>
-                        <ul class="dropdown">
-                            <li><a href="#">Option 1</a></li>
-                            <li><a href="#">Option 2</a></li>
-                            <li><a href="#">Option 3</a></li>
-                            <li><a href="#">Option 4</a></li>
-                        </ul>
+                  </ul>
+                </li>
+                <li>
+                  <input
+                    type="checkbox"
+                    id="mainLayer2"
+                    name="mainLayer2"
+                    onclick="toggleSubLayers('mainLayer2-subLayers', this)"
+                  />
+                  <label for="mainLayer2">Beskid Mały</label>
+                  <ul id="mainLayer2-subLayers" style="display: none">
+                    <li>
+                      <input
+                        type="checkbox"
+                        id="subLayer2_1"
+                        name="subLayer2_1"
+                      />
+                      <label for="subLayer2_1">Beskid Mały - Warstwa 1</label>
                     </li>
-                    <li><a href="#">Drukuj</a></li>
-                </ul>
-            </nav>
-            <div class="content2">
-                <div id="legend-container" class="legend-container">
-                    <div id="legend">
-                        <h6>Warstwy główne:</h6>
-                        <ul class="layer-list">
-                            <li>
-                                <input type="checkbox" id="mainLayer1" name="mainLayer1" onclick="toggleMainLayer('mainLayer1', ['subLayer1', 'subLayer2'])">
-                                <label for="mainLayer1">Warstwa główna 1</label>
-                                <ul>
-                                    <li>
-                                        <input type="checkbox" id="subLayer1" name="subLayer1" onclick="toggleLayer('subLayer1')">
-                                        <label for="subLayer1">Beskid Śląski - Warstwa 1</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="subLayer2" name="subLayer2" onclick="toggleLayer('subLayer2')">
-                                        <label for="subLayer2">Beskid Śląski - Warstwa 2</label>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="mainLayer2" name="mainLayer2" onclick="toggleMainLayer('mainLayer2', [])">
-                                <label for="mainLayer2">Warstwa główna 2</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="mainLayer3" name="mainLayer3" onclick="toggleMainLayer('mainLayer3', [])">
-                                <label for="mainLayer3">Warstwa główna 3</label>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="box alt map-container">
-                    <div id="map"></div>
-                </div>
+                    <li>
+                      <input
+                        type="checkbox"
+                        id="subLayer2_2"
+                        name="subLayer2_2"
+                      />
+                      <label for="subLayer2_2">Beskid Mały - Warstwa 2</label>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <input
+                    type="checkbox"
+                    id="mainLayer3"
+                    name="mainLayer3"
+                    onclick="toggleSubLayers('mainLayer3-subLayers', this)"
+                  />
+                  <label for="mainLayer3">Inne - kolej</label>
+                  <ul id="mainLayer3-subLayers" style="display: none">
+                    <li>
+                      <input
+                        type="checkbox"
+                        id="subLayer3_1"
+                        name="subLayer3_1"
+                        onclick="toggleLayer('subLayer3_1', this)"
+                      />
+                      <label for="subLayer3_1">Stacje i przystanki</label>
+                    </li>
+                    <li>
+                      <input
+                        type="checkbox"
+                        id="subLayer3_2"
+                        name="subLayer3_2"
+                        onclick="toggleLayer('subLayer3_2', this)"
+                      />
+                      <label for="subLayer3_2">Linie kolejowe</label>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <input
+                    type="checkbox"
+                    id="mainLayer4"
+                    name="mainLayer4"
+                    onclick="toggleLayer('subLayer4_1', this)"
+                  />
+                  <label for="mainLayer4">Obszary fizjograficzne</label>
+                  <!-- Brak podwarstw, warstwa nie jest rozwijalna -->
+                </li>
+              </ul>
             </div>
-        </section>
-        <!-- Footer -->
-        <footer id="footer">
-            <ul class="icons">    
-                <li><a href="https://www.facebook.com/skpgharnasie" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
-                <li><a href="https://www.instagram.com/skpg_harnasie/" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
-                <li><a href="mailto:kurs@skpg.gliwice.pl" class="icon solid alt fa-envelope"><span class="label">Email</span></a></li>
-            </ul>
-            <ul class="copyright">
-                <li>&copy; AKO. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-            </ul>
-        </footer>
+          </div>
+          <div class="box alt map-container">
+            <div id="map"></div>
+          </div>
+        </div>
+      </section>
+      <!-- Footer -->
+      <footer id="footer">
+        <ul class="icons">
+          <li>
+            <a
+              href="https://www.facebook.com/skpgharnasie"
+              class="icon brands alt fa-facebook-f"
+              ><span class="label">Facebook</span></a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.instagram.com/skpg_harnasie/"
+              class="icon brands alt fa-instagram"
+              ><span class="label">Instagram</span></a
+            >
+          </li>
+          <li>
+            <a
+              href="mailto:kurs@skpg.gliwice.pl"
+              class="icon solid alt fa-envelope"
+              ><span class="label">Email</span></a
+            >
+          </li>
+        </ul>
+        <ul class="copyright">
+          <li>&copy; AKO. All rights reserved.</li>
+          <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+        </ul>
+      </footer>
     </div>
     <!-- Scripts -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -113,6 +214,6 @@
     <script src="js/assets/util.js"></script>
     <script src="js/assets/main.js"></script>
     <script src="js/auth.js"></script>
-    <script src="js/map.js"></script> 
-</body>
+    <script src="js/map.js"></script>
+  </body>
 </html>
