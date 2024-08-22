@@ -44,6 +44,12 @@ function addLayerToMap(layerName) {
     case "subLayer4_1":
       map.addLayer(balonsPhysographicAreasLayer);
       break;
+    case "subLayer99_1":
+      map.addLayer(hipso);
+      break;
+    case "subLayer99_2":
+      map.addLayer(cieniowanie);
+      break;
     // Dodaj inne przypadki w razie potrzeby
   }
 }
@@ -60,29 +66,170 @@ function removeLayerFromMap(layerName) {
     case "subLayer4_1":
       map.removeLayer(balonsPhysographicAreasLayer);
       break;
+    case "subLayer99_1":
+      map.removeLayer(hipso);
+      break;
+    case "subLayer99_2":
+      map.removeLayer(cieniowanie);
+      break;
     // Dodaj inne przypadki w razie potrzeby
   }
 }
 
+//-------definicja ukladu-----------------------------------------------------------------------//
+proj4.defs(
+  "EPSG:2180",
+  "+proj=tmerc +lat_0=0 +lon_0=19 +k=0.9993 +x_0=500000 +y_0=-5300000 +ellps=GRS80 +units=m +no_defs"
+);
+
+var crs = new L.Proj.CRS(
+  "EPSG:2180",
+  "+proj=tmerc +lat_0=0 +lon_0=19 +k=0.9993 +x_0=500000 +y_0=-5300000 +ellps=GRS80 +units=m +no_defs",
+  {}
+);
+
 //-----inicjalizacja mapy------------------------------------------------------------------------//
 var map = L.map("map").setView([49.64, 19.12], 12);
 
-//---dodanie warstw-----------------------------------------------------------------------------//
-
-// warstwy podkładu
-var osm = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+//---dodanie warstwy podkładu-------------//
+var osm = L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution:
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-}).addTo(map);
+});
 
-var osmHOT = L.tileLayer(
-  "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",
+var orto = L.tileLayer.projwmts(
+  "https://mapy.geoportal.gov.pl/wss/service/PZGIK/ORTO/WMTS/StandardResolution",
   {
-    maxZoom: 19,
+    format: "image/jpeg",
+    tileSize: 512,
+    version: "1.0.0",
+    transparent: true,
+    crs: crs,
+    origin: [850000.0, 100000.0],
+    scales: [
+      30238155.714285716, 15119077.857142858, 7559538.928571429,
+      3779769.4642857146, 1889884.7321428573, 944942.3660714286,
+      472471.1830357143, 236235.59151785716, 94494.23660714286,
+      47247.11830357143, 23623.559151785714, 9449.423660714287,
+      4724.711830357143, 1889.8847321428573, 944.9423660714286,
+      472.4711830357143,
+    ],
+    tilematrixSet: "EPSG:2180",
+    crossOrigin: true,
+    minZoom: 5,
     attribution:
-      "© OpenStreetMap contributors, Tiles style by Humanitarian OpenStreetMap Team hosted by OpenStreetMap France",
+      '&copy; <a href="https://geoportal.gov.pl/">Główny Urząd Geodezji i Kartografii</a> contributors',
   }
 );
+
+var topo = L.tileLayer.projwmts(
+  "https://mapy.geoportal.gov.pl/wss/service/WMTS/guest/wmts/TOPO",
+  {
+    format: "image/jpeg",
+    tileSize: 512,
+    version: "1.0.0",
+    transparent: true,
+    crs: crs,
+    origin: [850000.0, 100000.0],
+    scales: [
+      7559538.928571429, 3779769.4642857146, 1889884.7321428573,
+      944942.3660714286, 472471.1830357143, 236235.59151785716,
+      94494.23660714286, 47247.11830357143, 23623.559151785714,
+      9449.423660714287, 4724.711830357143, 1889.8847321428573,
+      944.9423660714286,
+    ],
+    tilematrixSet: "EPSG:2180",
+    crossOrigin: true,
+    minZoom: 5,
+    attribution:
+      '&copy; <a href="https://geoportal.gov.pl/">Główny Urząd Geodezji i Kartografii</a> contributors',
+  }
+);
+
+var google_terrain = L.tileLayer(
+  "http://{s}.google.com/vt?lyrs=p&x={x}&y={y}&z={z}",
+  {
+    maxZoom: 20,
+    subdomains: ["mt0", "mt1", "mt2", "mt3"],
+    attribution: "&copy; Google contributors",
+  }
+);
+
+new L.basemapsSwitcher(
+  [
+    {
+      layer: osm.addTo(map), //DEFAULT MAP
+      icon: "./images/mapLayer_img1.PNG",
+      name: "OpenStreetMap",
+    },
+    {
+      layer: orto,
+      icon: "./images/mapLayer_img2.PNG",
+      name: "Ortofotomapa",
+    },
+    {
+      layer: topo,
+      icon: "./images/mapLayer_img3.PNG",
+      name: "Mapa topograficzna",
+    },
+    {
+      layer: google_terrain,
+      icon: "./images/mapLayer_img4.PNG",
+      name: "GM Teren",
+    },
+  ],
+  { position: "bottomleft" }
+).addTo(map);
+
+var hipso = L.tileLayer.projwmts(
+  "https://mapy.geoportal.gov.pl/wss/service/PZGIK/NMT/GRID1/WMTS/HypsometryAndShadedRelief",
+  {
+    format: "image/jpeg",
+    tileSize: 512,
+    version: "1.0.0",
+    transparent: true,
+    crs: crs,
+    origin: [850000.0, 100000.0],
+    scales: [
+      7559538.928571429, 3779769.4642857146, 1889884.7321428573,
+      944942.3660714286, 472471.1830357143, 236235.59151785716,
+      94494.23660714286, 47247.11830357143, 23623.559151785714,
+      9449.423660714287, 4724.711830357143, 1889.8847321428573,
+      944.9423660714286,
+    ],
+    tilematrixSet: "EPSG:2180",
+    crossOrigin: true,
+    minZoom: 5,
+    attribution:
+      '&copy; <a href="https://geoportal.gov.pl/">Główny Urząd Geodezji i Kartografii</a> contributors',
+  }
+);
+
+var cieniowanie = L.tileLayer.projwmts(
+  "https://mapy.geoportal.gov.pl/wss/service/PZGIK/NMT/GRID1/WMTS/ShadedRelief",
+  {
+    format: "image/jpeg",
+    tileSize: 512,
+    version: "1.0.0",
+    transparent: true,
+    crs: crs,
+    origin: [850000.0, 100000.0],
+    scales: [
+      7559538.928571429, 3779769.4642857146, 1889884.7321428573,
+      944942.3660714286, 472471.1830357143, 236235.59151785716,
+      94494.23660714286, 47247.11830357143, 23623.559151785714,
+      9449.423660714287, 4724.711830357143, 1889.8847321428573,
+      944.9423660714286,
+    ],
+    tilematrixSet: "EPSG:2180",
+    crossOrigin: true,
+    minZoom: 5,
+    attribution:
+      '&copy; <a href="https://geoportal.gov.pl/">Główny Urząd Geodezji i Kartografii</a> contributors',
+  }
+);
+
+//---dodanie warstw wektorowych-----------//
 
 // point - stacje i przystanki
 var trainStationsAndStopsLayer = L.layerGroup();
@@ -196,7 +343,7 @@ fetch("/api/balonsPhysographicAreas")
     console.error("Error fetching balonsPhysographicAreas:", error)
   );
 
-// definicje stylu
+//---definicje stylu----------------------//
 const stationIcon = L.divIcon({
   className: "custom-div-icon",
   html: "<div style='background-color:black; width:12px; height:12px; border-radius: 50%;'></div>",
@@ -218,7 +365,27 @@ const nonStopIcon = L.divIcon({
   iconAnchor: [6, 6],
 });
 
-//usuwanie wszystkiego z mapy
+//---kolejnosc wyświetlania warstw--------//
+hipso.setZIndex(2);
+cieniowanie.setZIndex(1);
+
+//---transparentnosc warstw---------------//
+const transparencyCollection = {
+  OpenStreetMap: osm,
+  Ortofotomapa: orto,
+  "Mapa topograficzna": topo,
+  "Google Terrain": google_terrain,
+  Hipsometria: hipso,
+  Cieniowanie: cieniowanie,
+};
+
+L.control
+  .opacity(transparencyCollection, {
+    label: "Poziom przezroczystości",
+  })
+  .addTo(map);
+
+//---usuwanie wszystkiego z mapy----------//
 map.removeLayer(trainStationsAndStopsLayer);
 map.removeLayer(trainLinesLayer);
 map.removeLayer(balonsPhysographicAreasLayer);

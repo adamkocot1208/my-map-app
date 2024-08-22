@@ -9,9 +9,14 @@
     />
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/map_styles.css" />
-    <!-- Link to the new map_styles.css -->
+    <link rel="stylesheet" href="css/L.switchBasemap.css" />
+    <link rel="stylesheet" href="css/L.Control.Opacity.css" />
     <noscript><link rel="stylesheet" href="css/noscript.css" /></noscript>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
   </head>
   <body class="is-preload landing">
     <div id="page-wrapper">
@@ -37,7 +42,7 @@
         <nav id="map-nav" class="map-nav">
           <ul>
             <li>
-              <a href="#">Edycja</a>
+              <a href="#"><i class="fas fa-pencil-alt"></i> Edycja</a>
               <ul class="dropdown">
                 <li><a href="#">Option 1</a></li>
                 <li><a href="#">Option 2</a></li>
@@ -46,7 +51,7 @@
               </ul>
             </li>
             <li>
-              <a href="#">Dodaj obiekt</a>
+              <a href="#"><i class="fas fa-plus"></i> Dodaj obiekt</a>
               <ul class="dropdown">
                 <li><a href="#">Option 1</a></li>
                 <li><a href="#">Option 2</a></li>
@@ -55,7 +60,7 @@
               </ul>
             </li>
             <li>
-              <a href="#">Usuń obiekt</a>
+              <a href="#"><i class="fas fa-minus"></i> Usuń obiekt</a>
               <ul class="dropdown">
                 <li><a href="#">Option 1</a></li>
                 <li><a href="#">Option 2</a></li>
@@ -63,9 +68,12 @@
                 <li><a href="#">Option 4</a></li>
               </ul>
             </li>
-            <li><a href="#">Drukuj</a></li>
+            <li>
+              <a href="#"><i class="fas fa-print"></i> Drukuj</a>
+            </li>
           </ul>
         </nav>
+
         <div class="content2">
           <div id="legend-container" class="legend-container">
             <div id="legend">
@@ -164,6 +172,36 @@
                   <label for="mainLayer4">Obszary fizjograficzne</label>
                   <!-- Brak podwarstw, warstwa nie jest rozwijalna -->
                 </li>
+                <h6>Inne źródła podkładowe:</h6>
+                <li>
+                  <input
+                    type="checkbox"
+                    id="mainLayer99"
+                    name="mainLayer99"
+                    onclick="toggleSubLayers('mainLayer99-subLayers', this)"
+                  />
+                  <label for="mainLayer99">GUGiK</label>
+                  <ul id="mainLayer99-subLayers" style="display: none">
+                    <li>
+                      <input
+                        type="checkbox"
+                        id="subLayer99_1"
+                        name="subLayer99_1"
+                        onclick="toggleLayer('subLayer99_1', this)"
+                      />
+                      <label for="subLayer99_1">Hipsometria</label>
+                    </li>
+                    <li>
+                      <input
+                        type="checkbox"
+                        id="subLayer99_2"
+                        name="subLayer99_2"
+                        onclick="toggleLayer('subLayer99_2', this)"
+                      />
+                      <label for="subLayer99_2">Cieniowanie</label>
+                    </li>
+                  </ul>
+                </li>
               </ul>
             </div>
           </div>
@@ -205,7 +243,11 @@
     </div>
     <!-- Scripts -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="js/L.Control.Layers.Tree.js"></script>
+    <script src="https://unpkg.com/proj4leaflet@1.0.2/lib/proj4-compressed.js"></script>
+    <script src="https://unpkg.com/proj4leaflet@1.0.2/src/proj4leaflet.js"></script>
+    <script src="js/TileLayer.ProjWMTS.js"></script>
+    <script src="js/L.switchBasemap.js"></script>
+    <script src="js/L.Control.Opacity.js"></script>
     <script src="js/assets/jquery.min.js"></script>
     <script src="js/assets/jquery.scrolly.min.js"></script>
     <script src="js/assets/jquery.dropotron.min.js"></script>
