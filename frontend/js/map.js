@@ -45,10 +45,10 @@ function addLayerToMap(layerName) {
       map.addLayer(balonsPhysographicAreasLayer);
       break;
     case "subLayer99_1":
-      map.addLayer(hipso);
+      map.addLayer(layers.subLayer99_1);
       break;
     case "subLayer99_2":
-      map.addLayer(cieniowanie);
+      map.addLayer(layers.subLayer99_2);
       break;
     // Dodaj inne przypadki w razie potrzeby
   }
@@ -67,12 +67,19 @@ function removeLayerFromMap(layerName) {
       map.removeLayer(balonsPhysographicAreasLayer);
       break;
     case "subLayer99_1":
-      map.removeLayer(hipso);
+      map.removeLayer(layers.subLayer99_1);
       break;
     case "subLayer99_2":
-      map.removeLayer(cieniowanie);
+      map.removeLayer(layers.subLayer99_2);
       break;
     // Dodaj inne przypadki w razie potrzeby
+  }
+}
+
+// Funkcja do ustawiania poziomiu przezroczystości
+function setLayerOpacity(layerId, opacity) {
+  if (map.hasLayer(layers[layerId])) {
+    layers[layerId].setOpacity(opacity);
   }
 }
 
@@ -92,6 +99,8 @@ var crs = new L.Proj.CRS(
 var map = L.map("map").setView([49.64, 19.12], 12);
 
 //---dodanie warstwy podkładu-------------//
+var layers = {};
+
 var osm = L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution:
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -155,7 +164,7 @@ var google_terrain = L.tileLayer(
   }
 );
 
-new L.basemapsSwitcher(
+var basemapsSwitcher = L.basemapsSwitcher(
   [
     {
       layer: osm.addTo(map), //DEFAULT MAP
@@ -181,7 +190,7 @@ new L.basemapsSwitcher(
   { position: "bottomleft" }
 ).addTo(map);
 
-var hipso = L.tileLayer.projwmts(
+layers.subLayer99_1 = L.tileLayer.projwmts(
   "https://mapy.geoportal.gov.pl/wss/service/PZGIK/NMT/GRID1/WMTS/HypsometryAndShadedRelief",
   {
     format: "image/jpeg",
@@ -200,12 +209,13 @@ var hipso = L.tileLayer.projwmts(
     tilematrixSet: "EPSG:2180",
     crossOrigin: true,
     minZoom: 5,
+    opacity: 1,
     attribution:
       '&copy; <a href="https://geoportal.gov.pl/">Główny Urząd Geodezji i Kartografii</a> contributors',
   }
 );
 
-var cieniowanie = L.tileLayer.projwmts(
+layers.subLayer99_2 = L.tileLayer.projwmts(
   "https://mapy.geoportal.gov.pl/wss/service/PZGIK/NMT/GRID1/WMTS/ShadedRelief",
   {
     format: "image/jpeg",
@@ -224,6 +234,7 @@ var cieniowanie = L.tileLayer.projwmts(
     tilematrixSet: "EPSG:2180",
     crossOrigin: true,
     minZoom: 5,
+    opacity: 1,
     attribution:
       '&copy; <a href="https://geoportal.gov.pl/">Główny Urząd Geodezji i Kartografii</a> contributors',
   }
@@ -366,24 +377,10 @@ const nonStopIcon = L.divIcon({
 });
 
 //---kolejnosc wyświetlania warstw--------//
-hipso.setZIndex(2);
-cieniowanie.setZIndex(1);
+layers.subLayer99_1.setZIndex(2);
+layers.subLayer99_2.setZIndex(1);
 
 //---transparentnosc warstw---------------//
-const transparencyCollection = {
-  OpenStreetMap: osm,
-  Ortofotomapa: orto,
-  "Mapa topograficzna": topo,
-  "Google Terrain": google_terrain,
-  Hipsometria: hipso,
-  Cieniowanie: cieniowanie,
-};
-
-L.control
-  .opacity(transparencyCollection, {
-    label: "Poziom przezroczystości",
-  })
-  .addTo(map);
 
 //---usuwanie wszystkiego z mapy----------//
 map.removeLayer(trainStationsAndStopsLayer);

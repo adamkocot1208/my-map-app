@@ -218,3 +218,14 @@
 .layer-list ul.show {
     display: block;
 }
+
+.layer-list li input[type="range"] {
+    display: block; 
+    width: 75%;
+    height: 3px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    margin-left: 40px;
+    font-size: 10pt;
+    /* Dodaje margines górny, aby suwak znajdował się poniżej etykiety */
+}
