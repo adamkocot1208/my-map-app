@@ -211,6 +211,59 @@
                 </li>
               </ul>
             </div>
+            <div id="opacity" class="opacity">
+              <h6>Ustawienia przezroczystości podkładu:</h6>
+              <ul class="opacity-list">
+                <li>
+                  <label for="opacitySliderBM1">OpenStreetMap</label>
+                  <input
+                    type="range"
+                    id="opacitySliderBM1"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    value="1"
+                    onchange="setBaseLayerOpacity('baseMap1', this.value)"
+                  />
+                </li>
+                <li>
+                  <label for="opacitySliderBM2">Ortofotomapa</label>
+                  <input
+                    type="range"
+                    id="opacitySliderBM2"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    value="1"
+                    onchange="setBaseLayerOpacity('baseMap2', this.value)"
+                  />
+                </li>
+                <li>
+                  <label for="opacitySliderBM3">Mapa topograficzna</label>
+                  <input
+                    type="range"
+                    id="opacitySliderBM3"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    value="1"
+                    onchange="setBaseLayerOpacity('baseMap3', this.value)"
+                  />
+                </li>
+                <li>
+                  <label for="opacitySliderBM4">Google Terrain</label>
+                  <input
+                    type="range"
+                    id="opacitySliderBM4"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    value="1"
+                    onchange="setBaseLayerOpacity('baseMap4', this.value)"
+                  />
+                </li>
+              </ul>
+            </div>
           </div>
           <div class="box alt map-container">
             <div id="map"></div>

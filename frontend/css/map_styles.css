@@ -62,16 +62,24 @@
 }
 
 #banner2 .legend-container {
+    display: flex;
+    flex-direction: column;
     width: 20%;
     height: 100%;
     background-color: #f0f0f0;
-    /* Szare tło */
     margin: 0;
     padding: 0.5em;
     border: 1px solid #e44c65;
-    display: flex;
-    justify-content: left;
-    align-items: center;
+}
+
+#banner2 .legend-container #legend {
+    flex-grow: 2;
+    width: 100%;
+    height: auto;
+    text-align: left;
+    color: #000000;
+    overflow-y: auto;
+    padding-bottom: 1em;
 }
 
 #banner2 .legend-container #legend {
@@ -155,8 +163,7 @@
     display: flex;
     justify-content: left;
     align-items: flex-start;
-    overflow-y: auto;
-    overflow-x: auto;
+
     /* Dodaje przewijanie, jeśli zawartość przekracza wysokość */
 }
 
@@ -165,12 +172,14 @@
     height: 100%;
     text-align: left;
     color: #000000;
+    overflow-y: auto;
+    overflow-x: auto;
 }
 
 #banner2 .legend-container h6 {
     text-align: left;
     color: #e44c65;
-    font-size: 1em;
+    font-size: 0.8em;
     text-decoration: underline;
     font-weight: bold;
 }
@@ -221,11 +230,59 @@
 
 .layer-list li input[type="range"] {
     display: block; 
-    width: 75%;
+    width: 80%;
     height: 3px;
     margin-top: 5px;
     margin-bottom: 10px;
     margin-left: 40px;
     font-size: 10pt;
     /* Dodaje margines górny, aby suwak znajdował się poniżej etykiety */
+}
+
+#banner2 .legend-container .opacity-list  {
+  margin: 0 0 0em 0;
+  padding-left: 0em;
+}
+
+#banner2 .legend-container .opacity-list li {
+    list-style: none;
+}
+#banner2 .legend-container #opacity {
+    flex-grow: 1;
+    width: 100%;
+    height: auto;
+    text-align: left;
+    color: #000000;
+    list-style-type: none;
+margin-top:20px;
+border-top-color: #e44c65;
+border-top-width: 2px;
+border-top-style: solid ;
+}
+
+.opacity li input[type="range"] {
+    display: block; 
+    width: 90%;
+    height: 3px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    margin-left: 0px;
+    font-size: 10pt;
+    /* Dodaje margines górny, aby suwak znajdował się poniżej etykiety */
+}
+
+#banner2 .legend-container .opacity-list label {
+    color: #ffffff;
+  display: inline-block;
+  font-size: 0.75em;
+  vertical-align: middle;
+  font-weight: 300;
+  letter-spacing: 0.2rem;
+  line-height: 1.5;
+  margin: 0 0 0.5rem 0;
+  text-transform: uppercase;
+}
+
+#banner2 .legend-container h6 {
+margin-top: 10px;
 }

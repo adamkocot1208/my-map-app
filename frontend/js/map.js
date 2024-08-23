@@ -83,6 +83,31 @@ function setLayerOpacity(layerId, opacity) {
   }
 }
 
+// Funkcja do ustawiania poziomiu przezroczystości warstwy bazowej
+function setBaseLayerOpacity(layerName, opacity) {
+  let layer;
+  switch (layerName) {
+    case "baseMap1":
+      layer = osm; // Zmienna reprezentująca warstwę OSM
+      break;
+    case "baseMap2":
+      layer = orto; // Zmienna reprezentująca warstwę Orto
+      break;
+    case "baseMap3":
+      layer = topo; // Zmienna reprezentująca warstwę Topo
+      break;
+    case "baseMap4":
+      layer = google_terrain; // Zmienna reprezentująca warstwę Google Terrain
+      break;
+    default:
+      console.error("Nieznana warstwa: " + layerName);
+      return;
+  }
+  if (layer) {
+    layer.setOpacity(opacity);
+  }
+}
+
 //-------definicja ukladu-----------------------------------------------------------------------//
 proj4.defs(
   "EPSG:2180",
